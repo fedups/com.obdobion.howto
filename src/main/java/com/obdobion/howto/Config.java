@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,20 +21,26 @@ import com.obdobion.argument.type.WildFiles;
 
 final public class Config
 {
-    private final static Logger logger = LoggerFactory.getLogger(Config.class.getName());
+    private final static Logger logger        = LoggerFactory.getLogger(Config.class.getName());
 
-    @Arg(caseSensitive = true)
+    @Arg(caseSensitive = true, required = true)
     private WildFiles           plugins;
 
-    @Arg(caseSensitive = true, longName = "log4j")
+    @Arg(caseSensitive = true, longName = "log4j", required = true)
     private String              log4jConfigFileName;
 
-    @Arg(caseSensitive = true)
+    @Arg(caseSensitive = true, required = true)
     private String              version;
+
+    @Arg(caseSensitive = true, required = true)
+    private File                history;
 
     private final String        configFileLocation;
     private final ICmdLine      properties;
     private ClassLoader         pluginClassLoader;
+
+    private final Pattern       badJarPattern = Pattern.compile(
+                                                      "junit|commons-codec|slf4j|log4j|algebrain|argument|calendar|howto-[.0-9]+jar");
 
     public Config(final String appDir) throws IOException, ParseException
     {
@@ -41,7 +51,18 @@ final public class Config
          * necessary.
          */
         properties = CmdLine.loadProperties(this, new File(configFileLocation));
-        setPluginClassLoader(new URLClassLoader(getPluginJars(), this.getClass().getClassLoader()));
+
+        LogManager.resetConfiguration();
+        DOMConfigurator.configure(getLog4jConfigFileName());
+
+        final URL[] pluginJars = getPluginJars();
+        if (pluginJars.length > 0)
+            setPluginClassLoader(new URLClassLoader(pluginJars, this.getClass().getClassLoader()));
+    }
+
+    public File getHistoryFile()
+    {
+        return history;
     }
 
     public String getLog4jConfigFileName()
@@ -57,14 +78,32 @@ final public class Config
     private URL[] getPluginJars() throws ParseException, IOException
     {
         final List<File> jarList = plugins.files();
-        final URL[] urlArray = new URL[jarList.size()];
-        int j = 0;
+        final List<URL> loadableJars = new ArrayList<>();
         for (final File jar : jarList)
-        {
-            urlArray[j++] = jar.toURI().toURL();
-            logger.debug("found plugin service jar: {}", jar.getAbsolutePath());
-        }
+            if (isLoadableJar(jar))
+            {
+                loadableJars.add(jar.toURI().toURL());
+                logger.debug("found plugin jar: {}", jar.getAbsolutePath());
+            }
+
+        final URL[] urlArray = new URL[loadableJars.size()];
+        int j = 0;
+        for (final URL jar : loadableJars)
+            urlArray[j++] = jar;
         return urlArray;
+    }
+
+    /**
+     * Do not load jars that are part of this howto app. They would create odd
+     * situations because they would overload the jars that this app expects.
+     *
+     * @param jar
+     * @return
+     */
+    private boolean isLoadableJar(final File jar)
+    {
+        final boolean bad = badJarPattern.matcher(jar.getName()).find();
+        return !bad;
     }
 
     public void saveToDisk() throws ParseException, IOException
@@ -73,7 +112,7 @@ final public class Config
         properties.exportNamespace(new File(configFileLocation));
     }
 
-    private void setPluginClassLoader(final URLClassLoader urlClassLoader)
+    private void setPluginClassLoader(final ClassLoader urlClassLoader)
     {
         pluginClassLoader = urlClassLoader;
     }

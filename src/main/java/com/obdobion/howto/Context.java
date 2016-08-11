@@ -11,6 +11,9 @@ final public class Context
     private PrintWriter          consoleOutput;
     private PrintWriter          consoleErrorOutput;
     private ICmdLine             myParser;
+    private long                 startNanoTime;
+    private long                 endNanoTime;
+    private boolean              recordingHistory;
 
     public Map<String, IPlugin> getAllKnownCommands()
     {
@@ -27,9 +30,24 @@ final public class Context
         return consoleOutput;
     }
 
-    public ICmdLine getMyParser()
+    public long getEndTime()
+    {
+        return endNanoTime;
+    }
+
+    public ICmdLine getParser()
     {
         return myParser;
+    }
+
+    public long getStartTime()
+    {
+        return startNanoTime;
+    }
+
+    public boolean isRecordingHistory()
+    {
+        return recordingHistory;
     }
 
     public void setAllKnownCommands(final Map<String, IPlugin> allKnownCommands)
@@ -47,8 +65,23 @@ final public class Context
         consoleOutput = pw;
     }
 
-    public void setMyParser(final ICmdLine myParser)
+    public void setEndTime(final long nanoTime)
+    {
+        endNanoTime = nanoTime;
+    }
+
+    public void setParser(final ICmdLine myParser)
     {
         this.myParser = myParser;
+    }
+
+    public void setRecordingHistory(final boolean recordingHistory)
+    {
+        this.recordingHistory = recordingHistory;
+    }
+
+    public void setStartTime(final long nanoTime)
+    {
+        startNanoTime = nanoTime;
     }
 }

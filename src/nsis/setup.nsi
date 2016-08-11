@@ -83,16 +83,18 @@ Section "howto"
     File /x *source* ..\..\target\howto-${PROJECT_VERSION}.jar
      
     FileOpen $9 howto.bat w
-    FileWrite $9 "@echo off$\r$\n"
-    FileWrite $9 "java -Dhowto.config=$\"$INSTDIR\howto.cfg$\" -jar $\"$INSTDIR\howto-${PROJECT_VERSION}.jar$\" %*$\r$\n"
-    FileClose $9
+    FileWrite $9 "@echo off$\r$\n"    
+    FileWrite $9 "java "
+;    FileWrite $9 "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000 "
+    FileWrite $9 "-Dhowto.config=$\"$INSTDIR\howto.cfg$\" "
+    FileWrite $9 "-jar $\"$INSTDIR\howto-${PROJECT_VERSION}.jar$\" "
+    FileWrite $9 "%*$\r$\n"
         
     ${EnvVarUpdate} $0 "PATH" "A" "HKLM" $INSTDIR
     
     createDirectory $INSTDIR\plugins
     CreateDirectory "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}"
     CreateDirectory "$AppData\Obdobion\${PROJECT_ARTIFACT_ID}"
-    createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo.lnk" "$INSTDIR\howto.bat" "" ""
     createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Log.lnk" "$AppData\Obdobion\howto\howto.log" "" ""
     createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Log Config.lnk" "$INSTDIR\log4j.xml" "" ""
     createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Config.lnk" "$INSTDIR\howto.cfg" "" ""
@@ -108,16 +110,12 @@ FunctionEnd
 
 Section "uninstall"
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" $INSTDIR
-    delete "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo.lnk"
-    delete "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Log.lnk"
-    delete "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Log Config.lnk"
-    delete "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Config.lnk"
-    delete "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo uninstall.lnk"
-    delete $INSTDIR\howto.bat
+    delete "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\*.lnk"
+    delete $INSTDIR\*.bat
     delete $INSTDIR\*.jar
     delete $INSTDIR\log4j.xml
-    delete $INSTDIR\plugins\*.jar
-    delete $INSTDIR\plugins
+    delete $INSTDIR\*.exe
+    rmdir /r $INSTDIR\plugins\*.*
 SectionEnd
 
 Function .onInit

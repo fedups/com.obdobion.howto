@@ -8,8 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.xml.DOMConfigurator;
+import org.apache.log4j.NDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,18 +45,19 @@ final public class App
     private String               commandName;
     private String[]             commandLineArgs;
 
+    private final HistoryManager histman;
+
     private App(final String[] commandLineArgs)
     {
         try
         {
             config = new Config(workDir());
+
         } catch (IOException | ParseException e)
         {
             System.err.println("loading config: " + e.getMessage());
-            return;
+            System.exit(-1);
         }
-        LogManager.resetConfiguration();
-        DOMConfigurator.configure(config.getLog4jConfigFileName());
         loadCommands();
 
         if (commandLineArgs.length == 0)
@@ -72,6 +72,8 @@ final public class App
             else
                 setCommandLineArgs(Arrays.copyOfRange(commandLineArgs, 1, commandLineArgs.length));
         }
+
+        histman = new HistoryManager(config);
     }
 
     private IPlugin getCommand()
@@ -100,14 +102,17 @@ final public class App
          * The pluginClassLoader not only includes all of the extension plugin
          * jars but also the classes in this app itself.
          */
+        commands = new HashMap<>();
         loadPlugins("plugin", config.getPluginClassLoader());
     }
 
-    private void loadPlugins(final String category, final ClassLoader classLoader)
+    private void loadPlugins(final String category, ClassLoader classLoader)
     {
+        if (classLoader == null)
+            classLoader = this.getClass().getClassLoader();
+
         final ServiceLoader<IPlugin> pluginLoader = ServiceLoader.load(IPlugin.class, classLoader);
 
-        commands = new HashMap<>();
         for (final IPlugin plugin : pluginLoader)
         {
             if (plugin == null)
@@ -135,18 +140,27 @@ final public class App
             if (!isCommandSupported())
                 throw new ParseException("unknown command: " + getCommandName(), 0);
 
+            NDC.push(getCommand().getName());
+
             final ICmdLine cmdline = new CmdLine(getCommand().getName(), getCommand().getOverview());
             CmdLine.load(cmdline, getCommand(), getCommandLineArgs());
             if (((CmdLine) cmdline).isUsageRun())
                 return 0;
 
             context = new Context();
-            context.setMyParser(cmdline);
+            context.setRecordingHistory(true);
+            context.setParser(cmdline);
             context.setAllKnownCommands(commands);
             context.setConsoleOutput(new PrintWriter(System.out));
             context.setConsoleErrorOutput(new PrintWriter(System.err));
 
+            final StringBuilder loggableArgs = new StringBuilder();
+            cmdline.exportCommandLine(loggableArgs);
+            logger.info("{}", loggableArgs);
+
+            context.setStartTime(System.nanoTime());
             getCommand().execute(context);
+            context.setEndTime(System.nanoTime());
 
             context.getConsoleOutput().flush();
             context.getConsoleErrorOutput().flush();
@@ -156,6 +170,12 @@ final public class App
             logger.error("loading command {}", e.getMessage(), e);
             System.err.println(e.getMessage());
             return -1;
+        } finally
+        {
+
+            histman.record(context);
+            NDC.pop();
+
         }
         return 0;
     }
