@@ -1,0 +1,56 @@
+package com.obdobion.howto.writer;
+
+import com.obdobion.howto.Config;
+
+/**
+ * <p>
+ * OutlineWriters class.
+ * </p>
+ *
+ * @author Chris DeGreef fedupforone@gmail.com
+ */
+public enum OutlineWriters
+{
+    /**
+     * ConsoleWriter.
+     *
+     * Writes a simple text based output to the console.
+     *
+     * @author Chris DeGreef fedupforone@gmail.com
+     *
+     */
+    Console,
+
+    /**
+     * SystemOutWriter.
+     *
+     * Writes a simple text based output to System.out
+     *
+     * @author Chris DeGreef fedupforone@gmail.com
+     *
+     */
+    System;
+
+    /**
+     * <p>
+     * create.
+     * </p>
+     *
+     * @param config
+     *            a {@link com.obdobion.howto.Config} object.
+     * @return a {@link com.obdobion.howto.writer.IOutlineWriter} object.
+     */
+    static final public IOutlineWriter create(final Config config)
+    {
+        switch (config.getWriterType())
+        {
+        case Console:
+            return new ConsoleWriter(config);
+        case System:
+            return new SystemOutWriter(config);
+        default:
+            break;
+        }
+        return new ConsoleWriter(config);
+    }
+}

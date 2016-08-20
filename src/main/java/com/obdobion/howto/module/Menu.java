@@ -2,20 +2,22 @@ package com.obdobion.howto.module;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import com.obdobion.argument.annotation.Arg;
 import com.obdobion.howto.Context;
-import com.obdobion.howto.IPlugin;
+import com.obdobion.howto.IPluginCommand;
+import com.obdobion.howto.PluginNotFoundException;
 
 /**
- * @author Chris DeGreef fedupforone@gmail.com
+ * <p>
+ * Menu class.
+ * </p>
  *
+ * @author Chris DeGreef fedupforone@gmail.com
  */
-public class Menu implements IPlugin
+public class Menu implements IPluginCommand
 {
     @Arg(shortName = 'm', help = "Only commands matching all patterns will be displayed.")
     private Pattern[] matches;
@@ -23,8 +25,17 @@ public class Menu implements IPlugin
     @Arg(allowCamelCaps = true, shortName = 's')
     private boolean   sortDescending;
 
+    int               longestGroupLength = 6;
+    int               longestNameLength  = 8;
+
+    /**
+     * <p>
+     * Constructor for Menu.
+     * </p>
+     */
     public Menu()
-    {}
+    {
+    }
 
     private boolean allMatchersMatch(final String output)
     {
@@ -42,28 +53,60 @@ public class Menu implements IPlugin
     {
         context.setRecordingHistory(false);
 
-        final Set<String> keys = context.getAllKnownCommands().keySet();
-        final TreeSet<String> sortedKeys = new TreeSet<>(keys);
+        final List<String> keys = context.getPluginManager().allNames();
+        keys.sort((o1, o2) -> {
+            if (sortDescending)
+                return o2.compareTo(o1);
+            return o1.compareTo(o2);
+        });
 
-        Iterator<String> iter = null;
-        if (sortDescending)
-            iter = sortedKeys.descendingIterator();
-        else
-            iter = sortedKeys.iterator();
+        keys.forEach(pluginName -> {
+            try
+            {
+                final IPluginCommand pluginCommand = context.getPluginManager().get(pluginName);
+                if (pluginCommand.getGroup().length() > longestGroupLength)
+                    longestGroupLength = pluginCommand.getGroup().length();
+                if (pluginCommand.getName().length() > longestNameLength)
+                    longestNameLength = pluginCommand.getName().length();
 
-        while (iter.hasNext())
-        {
-            final IPlugin plugin = context.getAllKnownCommands().get(iter.next());
+            } catch (final PluginNotFoundException e)
+            {
+            }
+        });
 
-            final StringWriter sw = new StringWriter();
-            final PrintWriter pw = new PrintWriter(sw);
-            pw.printf("%1$-10s%2$s\n", plugin.getName(), plugin.getOverview());
-            final String output = sw.toString();
+        final String layout = "%1$-" + longestGroupLength + "s %2$" + longestNameLength + "s | %3$s\n";
 
-            if (allMatchersMatch(output))
-                context.getConsoleOutput().append(sw.toString());
-        }
+        context.getOutline().printf(layout, "Group", "Command", "Overview");
+        context.getOutline().printf(layout, "-----", "-------", "--------");
+
+        keys.forEach(pluginName -> {
+            try
+            {
+                final StringWriter sw = new StringWriter();
+                try (PrintWriter pw = new PrintWriter(sw))
+                {
+                    final IPluginCommand pluginCommand = context.getPluginManager().get(pluginName);
+
+                    pw.printf(layout, pluginCommand.getGroup(), pluginCommand.getName(), pluginCommand.getOverview());
+                    final String output = sw.toString();
+
+                    if (allMatchersMatch(output))
+                        context.getOutline().printf(sw.toString());
+                }
+            } catch (final PluginNotFoundException e)
+            {
+            }
+        });
+
+        context.getOutline().printf(layout, "-----", "-------", "--------");
         return 0;
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String getGroup()
+    {
+        return "System";
     }
 
     /** {@inheritDoc} */

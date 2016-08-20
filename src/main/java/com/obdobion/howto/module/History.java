@@ -10,9 +10,16 @@ import com.obdobion.argument.annotation.Arg;
 import com.obdobion.howto.Context;
 import com.obdobion.howto.HistoryManager;
 import com.obdobion.howto.HistoryManager.HistoryRecord;
-import com.obdobion.howto.IPlugin;
+import com.obdobion.howto.IPluginCommand;
 
-public class History implements IPlugin
+/**
+ * <p>
+ * History class.
+ * </p>
+ *
+ * @author Chris DeGreef fedupforone@gmail.com
+ */
+public class History implements IPluginCommand
 {
     private final static Logger logger = LoggerFactory.getLogger(History.class.getName());
 
@@ -22,6 +29,11 @@ public class History implements IPlugin
     @Arg(shortName = 'c', help = "Limit to this many rows of output.", range = { "1" }, defaultValues = "10")
     private int                 count;
 
+    /**
+     * <p>
+     * Constructor for History.
+     * </p>
+     */
     public History()
     {
     }
@@ -36,6 +48,7 @@ public class History implements IPlugin
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int execute(final Context context)
     {
@@ -61,17 +74,26 @@ public class History implements IPlugin
         {
             final String output = history.get(startingPoint).getContents();
             if (allMatchersMatch(output))
-                context.getConsoleOutput().printf("%1$d: %2$s\n", startingPoint + 1, output);
+                context.getOutline().printf("%1$d: %2$s\n", startingPoint + 1, output);
         }
         return 0;
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public String getGroup()
+    {
+        return "System";
+    }
+
+    /** {@inheritDoc} */
     @Override
     public String getName()
     {
         return "history";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getOverview()
     {

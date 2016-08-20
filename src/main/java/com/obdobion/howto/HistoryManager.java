@@ -11,6 +11,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * <p>HistoryManager class.</p>
+ *
+ * @author Chris DeGreef fedupforone@gmail.com
+ */
 public class HistoryManager
 {
     public static class HistoryRecord
@@ -39,6 +44,11 @@ public class HistoryManager
 
     static private HistoryManager instance;
 
+    /**
+     * <p>Getter for the field <code>instance</code>.</p>
+     *
+     * @return a {@link com.obdobion.howto.HistoryManager} object.
+     */
     static public HistoryManager getInstance()
     {
         return instance;
@@ -46,12 +56,22 @@ public class HistoryManager
 
     private final Config config;
 
+    /**
+     * <p>Constructor for HistoryManager.</p>
+     *
+     * @param config a {@link com.obdobion.howto.Config} object.
+     */
     public HistoryManager(final Config config)
     {
         HistoryManager.instance = this;
         this.config = config;
     }
 
+    /**
+     * <p>getHistory.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<HistoryRecord> getHistory()
     {
         return loadHistory();
@@ -74,6 +94,11 @@ public class HistoryManager
         return history;
     }
 
+    /**
+     * <p>record.</p>
+     *
+     * @param context a {@link com.obdobion.howto.Context} object.
+     */
     public void record(final Context context)
     {
         if (context == null)

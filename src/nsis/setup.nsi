@@ -75,9 +75,12 @@ Section "howto"
 
     ${StrRep} $0 $AppData "\" "/"
     !insertmacro _ReplaceInFile log4j.xml !{APPDATA} $0
+    !insertmacro _ReplaceInFile log4jdebug.xml !{APPDATA} $0
 
     !insertmacro _ReplaceInFile howto.cfg !{VERSION} ${PROJECT_VERSION}
     !insertmacro _ReplaceInFile howto.cfg !{INSTDIR} $INSTDIR
+    !insertmacro _ReplaceInFile howtodebug.cfg !{VERSION} ${PROJECT_VERSION}
+    !insertmacro _ReplaceInFile howtodebug.cfg !{INSTDIR} $INSTDIR
 
     File ..\..\target\mavenDependenciesForNSIS\*.jar
     File /x *source* ..\..\target\howto-${PROJECT_VERSION}.jar
@@ -85,8 +88,14 @@ Section "howto"
     FileOpen $9 howto.bat w
     FileWrite $9 "@echo off$\r$\n"    
     FileWrite $9 "java "
-;    FileWrite $9 "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000 "
     FileWrite $9 "-Dhowto.config=$\"$INSTDIR\howto.cfg$\" "
+    FileWrite $9 "-jar $\"$INSTDIR\howto-${PROJECT_VERSION}.jar$\" "
+    FileWrite $9 "%*$\r$\n"
+     
+    FileOpen $9 howtodebug.bat w
+    FileWrite $9 "java "
+    FileWrite $9 "-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=8000 "
+    FileWrite $9 "-Dhowto.config=$\"$INSTDIR\howtodebug.cfg$\" "
     FileWrite $9 "-jar $\"$INSTDIR\howto-${PROJECT_VERSION}.jar$\" "
     FileWrite $9 "%*$\r$\n"
         
@@ -96,8 +105,6 @@ Section "howto"
     CreateDirectory "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}"
     CreateDirectory "$AppData\Obdobion\${PROJECT_ARTIFACT_ID}"
     createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Log.lnk" "$AppData\Obdobion\howto\howto.log" "" ""
-    createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Log Config.lnk" "$INSTDIR\log4j.xml" "" ""
-    createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Config.lnk" "$INSTDIR\howto.cfg" "" ""
     createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo uninstall.lnk" "$INSTDIR\uninstall.exe" "" ""
     
     writeUninstaller "$INSTDIR\uninstall.exe"

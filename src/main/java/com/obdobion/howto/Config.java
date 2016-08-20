@@ -18,7 +18,13 @@ import com.obdobion.argument.CmdLine;
 import com.obdobion.argument.ICmdLine;
 import com.obdobion.argument.annotation.Arg;
 import com.obdobion.argument.type.WildFiles;
+import com.obdobion.howto.writer.OutlineWriters;
 
+/**
+ * <p>Config class.</p>
+ *
+ * @author Chris DeGreef fedupforone@gmail.com
+ */
 final public class Config
 {
     private final static Logger logger        = LoggerFactory.getLogger(Config.class.getName());
@@ -35,13 +41,29 @@ final public class Config
     @Arg(caseSensitive = true, required = true)
     private File                history;
 
+    @Arg(defaultValues = "Console")
+    private OutlineWriters      writerType;
+
+    @Arg(defaultValues = "80", range = "10")
+    private int                 outlineWidth;
+
+    @Arg(defaultValues = "2", range = "0")
+    private int                 outlineIndentSize;
+
     private final String        configFileLocation;
+
     private final ICmdLine      properties;
     private ClassLoader         pluginClassLoader;
-
     private final Pattern       badJarPattern = Pattern.compile(
                                                       "junit|commons-codec|slf4j|log4j|algebrain|argument|calendar|howto-[.0-9]+jar");
 
+    /**
+     * <p>Constructor for Config.</p>
+     *
+     * @param appDir a {@link java.lang.String} object.
+     * @throws java.io.IOException if any.
+     * @throws java.text.ParseException if any.
+     */
     public Config(final String appDir) throws IOException, ParseException
     {
         configFileLocation = System.getProperty("howto.config",
@@ -60,16 +82,51 @@ final public class Config
             setPluginClassLoader(new URLClassLoader(pluginJars, this.getClass().getClassLoader()));
     }
 
+    /**
+     * <p>getHistoryFile.</p>
+     *
+     * @return a {@link java.io.File} object.
+     */
     public File getHistoryFile()
     {
         return history;
     }
 
+    /**
+     * <p>Getter for the field <code>log4jConfigFileName</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getLog4jConfigFileName()
     {
         return log4jConfigFileName;
     }
 
+    /**
+     * <p>Getter for the field <code>outlineIndentSize</code>.</p>
+     *
+     * @return a int.
+     */
+    public int getOutlineIndentSize()
+    {
+        return outlineIndentSize;
+    }
+
+    /**
+     * <p>Getter for the field <code>outlineWidth</code>.</p>
+     *
+     * @return a int.
+     */
+    public int getOutlineWidth()
+    {
+        return outlineWidth;
+    }
+
+    /**
+     * <p>Getter for the field <code>pluginClassLoader</code>.</p>
+     *
+     * @return a {@link java.lang.ClassLoader} object.
+     */
     public ClassLoader getPluginClassLoader()
     {
         return pluginClassLoader;
@@ -94,6 +151,16 @@ final public class Config
     }
 
     /**
+     * <p>Getter for the field <code>writerType</code>.</p>
+     *
+     * @return a {@link com.obdobion.howto.writer.OutlineWriters} object.
+     */
+    public OutlineWriters getWriterType()
+    {
+        return writerType;
+    }
+
+    /**
      * Do not load jars that are part of this howto app. They would create odd
      * situations because they would overload the jars that this app expects.
      *
@@ -106,6 +173,12 @@ final public class Config
         return !bad;
     }
 
+    /**
+     * <p>saveToDisk.</p>
+     *
+     * @throws java.text.ParseException if any.
+     * @throws java.io.IOException if any.
+     */
     public void saveToDisk() throws ParseException, IOException
     {
         properties.pull(this);
