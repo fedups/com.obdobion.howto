@@ -10,8 +10,10 @@ import com.obdobion.howto.Config;
 /**
  * ConsoleWriter.
  *
- * Writes a simple text based output to the console or at least what the context
- * refers to as the console output.
+ * Writes a simple text based output to the console. This class is necessary for
+ * supporting jUnits. The java Console class returns null when they run. The
+ * selection of this class is controlled through the Config file. And in the
+ * case of jUnit testing that file is in the src/test/resources folder.
  *
  * @author Chris DeGreef fedupforone@gmail.com
  *

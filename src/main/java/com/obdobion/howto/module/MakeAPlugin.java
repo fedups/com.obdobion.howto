@@ -6,49 +6,55 @@ import com.obdobion.howto.IPluginCommand;
 import com.obdobion.howto.Outline;
 
 /**
- * <p>MakeAPlugin class.</p>
+ * <p>
+ * MakeAPlugin class.
+ * </p>
  *
  * @author Chris DeGreef fedupforone@gmail.com
  */
 public class MakeAPlugin implements IPluginCommand
 {
+    static public final String GROUP = Menu.GROUP;
+    static public final String NAME  = "makeAPlugin";
+
     @Arg(matches = "[a-z][a-zA-Z0-9]*",
             required = true,
             caseSensitive = true,
             allowCamelCaps = true,
             help = "Indicates the name of the command that you want to develop.  This needs to be unique within a specific group.")
-    String commandName;
+    String                     commandName;
 
     @Arg(matches = "[A-Z][a-zA-Z0-9]+",
             required = true,
             caseSensitive = true,
             allowCamelCaps = true,
             help = "Indicates the assigned group name for all of this commands in this plugin.")
-    String groupName;
+    String                     groupName;
 
     @Arg(required = true,
             allowCamelCaps = true,
             help = "Indicates the reverse domain name; if your domain was example.com then this parameter value would need to be com.example (the reverse.)")
-    String domainName;
+    String                     domainName;
 
     @Arg(required = true,
             caseSensitive = true,
             allowCamelCaps = true,
             help = "Indicates the disk folder where your git repositories reside.")
-    String gitRepoParentDirectory;
+    String                     gitRepoParentDirectory;
 
     @Arg(allowCamelCaps = true, defaultValues = "4.8.1")
-    String junitVersion;
+    String                     junitVersion;
 
     @Arg(allowCamelCaps = true, defaultValues = "0.0.3")
-    String howtoVersion;
+    String                     howtoVersion;
 
     /**
-     * <p>Constructor for MakeAPlugin.</p>
+     * <p>
+     * Constructor for MakeAPlugin.
+     * </p>
      */
     public MakeAPlugin()
-    {
-    }
+    {}
 
     /** {@inheritDoc} */
     @Override
@@ -70,7 +76,7 @@ public class MakeAPlugin implements IPluginCommand
     @Override
     public String getGroup()
     {
-        return "System";
+        return GROUP;
 
     }
 
@@ -78,7 +84,7 @@ public class MakeAPlugin implements IPluginCommand
     @Override
     public String getName()
     {
-        return "makeAPlugin";
+        return NAME;
     }
 
     /** {@inheritDoc} */

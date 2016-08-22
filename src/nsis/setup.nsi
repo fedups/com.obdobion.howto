@@ -89,7 +89,7 @@ Section "howto"
     FileWrite $9 "@echo off$\r$\n"    
     FileWrite $9 "java "
     FileWrite $9 "-Dhowto.config=$\"$INSTDIR\howto.cfg$\" "
-    FileWrite $9 "-jar $\"$INSTDIR\howto-${PROJECT_VERSION}.jar$\" "
+    FileWrite $9 "-jar $\"$INSTDIR\howto-${PROJECT_VERSION}.jar$\" System.interactiveConsole "
     FileWrite $9 "%*$\r$\n"
      
     FileOpen $9 howtodebug.bat w
@@ -104,6 +104,7 @@ Section "howto"
     createDirectory $INSTDIR\plugins
     CreateDirectory "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}"
     CreateDirectory "$AppData\Obdobion\${PROJECT_ARTIFACT_ID}"
+    createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo interactiveConsole.lnk" "$INSTDIR\howto.bat" "" ""
     createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo Log.lnk" "$AppData\Obdobion\howto\howto.log" "" ""
     createShortCut "$SMPROGRAMS\Obdobion\${PROJECT_ARTIFACT_ID}\HowTo uninstall.lnk" "$INSTDIR\uninstall.exe" "" ""
     

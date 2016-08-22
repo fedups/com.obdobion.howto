@@ -19,14 +19,17 @@ import com.obdobion.howto.PluginNotFoundException;
  */
 public class Menu implements IPluginCommand
 {
+    static public final String GROUP              = "System";
+    static public final String NAME               = "menu";
+
     @Arg(shortName = 'm', help = "Only commands matching all patterns will be displayed.")
-    private Pattern[] matches;
+    private Pattern[]          matches;
 
     @Arg(allowCamelCaps = true, shortName = 's')
-    private boolean   sortDescending;
+    private boolean            sortDescending;
 
-    int               longestGroupLength = 6;
-    int               longestNameLength  = 8;
+    int                        longestGroupLength = 6;
+    int                        longestNameLength  = 8;
 
     /**
      * <p>
@@ -34,8 +37,7 @@ public class Menu implements IPluginCommand
      * </p>
      */
     public Menu()
-    {
-    }
+    {}
 
     private boolean allMatchersMatch(final String output)
     {
@@ -70,8 +72,7 @@ public class Menu implements IPluginCommand
                     longestNameLength = pluginCommand.getName().length();
 
             } catch (final PluginNotFoundException e)
-            {
-            }
+            {}
         });
 
         final String layout = "%1$-" + longestGroupLength + "s %2$" + longestNameLength + "s | %3$s\n";
@@ -94,8 +95,7 @@ public class Menu implements IPluginCommand
                         context.getOutline().printf(sw.toString());
                 }
             } catch (final PluginNotFoundException e)
-            {
-            }
+            {}
         });
 
         context.getOutline().printf(layout, "-----", "-------", "--------");
@@ -106,14 +106,14 @@ public class Menu implements IPluginCommand
     @Override
     public String getGroup()
     {
-        return "System";
+        return GROUP;
     }
 
     /** {@inheritDoc} */
     @Override
     public String getName()
     {
-        return "menu";
+        return NAME;
     }
 
     /** {@inheritDoc} */

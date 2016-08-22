@@ -23,6 +23,9 @@ public class History implements IPluginCommand
 {
     private final static Logger logger = LoggerFactory.getLogger(History.class.getName());
 
+    static public final String  GROUP  = Menu.GROUP;
+    static public final String  NAME   = "history";
+
     @Arg(shortName = 'm', help = "Only history matching all patterns will be displayed.", caseSensitive = true)
     private Pattern[]           matches;
 
@@ -35,8 +38,7 @@ public class History implements IPluginCommand
      * </p>
      */
     public History()
-    {
-    }
+    {}
 
     private boolean allMatchersMatch(final String output)
     {
@@ -83,14 +85,14 @@ public class History implements IPluginCommand
     @Override
     public String getGroup()
     {
-        return "System";
+        return GROUP;
     }
 
     /** {@inheritDoc} */
     @Override
     public String getName()
     {
-        return "history";
+        return NAME;
     }
 
     /** {@inheritDoc} */

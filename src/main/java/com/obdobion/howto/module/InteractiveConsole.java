@@ -12,13 +12,15 @@ public class InteractiveConsole implements IPluginCommand
 {
     private final static Logger logger = LoggerFactory.getLogger(InteractiveConsole.class.getName());
 
+    public static final String  GROUP  = "IC";
+    public static final String  NAME   = "interactiveConsole";
+
     private Context             context;
     private Thread              consoleInputThread;
     private boolean             stop;
 
     public InteractiveConsole()
-    {
-    }
+    {}
 
     @Override
     public int execute(final Context p_context)
@@ -82,14 +84,14 @@ public class InteractiveConsole implements IPluginCommand
     @Override
     public String getGroup()
     {
-        return "System";
+        return GROUP;
     }
 
     /** {@inheritDoc} */
     @Override
     public String getName()
     {
-        return "interactiveConsole";
+        return NAME;
     }
 
     /** {@inheritDoc} */
@@ -115,7 +117,7 @@ public class InteractiveConsole implements IPluginCommand
 
         if (inputRequest.length() == 0)
         {
-            commandName = "menu";
+            commandName = Menu.NAME;
             arguments = "";
         } else
         {
@@ -132,7 +134,7 @@ public class InteractiveConsole implements IPluginCommand
             }
         }
 
-        if (commandName.equalsIgnoreCase("stop"))
+        if (commandName.equalsIgnoreCase(Quit.NAME))
         {
             stop();
             return;
