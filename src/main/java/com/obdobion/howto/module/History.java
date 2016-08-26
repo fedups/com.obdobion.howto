@@ -38,7 +38,8 @@ public class History implements IPluginCommand
      * </p>
      */
     public History()
-    {}
+    {
+    }
 
     private boolean allMatchersMatch(final String output)
     {
@@ -100,6 +101,13 @@ public class History implements IPluginCommand
     public String getOverview()
     {
         return "Show / modify the history of commands";
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean isOnceAndDone()
+    {
+        return false;
     }
 
 }

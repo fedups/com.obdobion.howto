@@ -8,6 +8,8 @@ import org.apache.log4j.NDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.obdobion.howto.module.Empty;
+
 /**
  * <p>
  * App class.
@@ -81,7 +83,7 @@ final public class App
 
         if (commandLineArgs.length == 0)
         {
-            setCommandName("menu");
+            setCommandName(Empty.GROUP + "." + Empty.NAME);
             setCommandLineArgs(new String[0]);
         } else
         {
@@ -117,7 +119,7 @@ final public class App
 
         } catch (PluginNotFoundException | IOException | ParseException e)
         {
-            logger.error("loading command {}", e.getMessage(), e);
+            logger.error("unsuccessfull {}", e.getMessage(), e);
             System.err.println(e.getMessage());
             return -1;
         } finally

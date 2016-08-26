@@ -37,7 +37,7 @@ class ConsoleWriter implements IOutlineWriter
 
     /** {@inheritDoc} */
     @Override
-    public void append(final String value)
+    public void append(final String value, final int wrappingIndentSize)
     {
         final String[] lines = value.split("\\n");
         String remainderOfLongLine = "";
@@ -55,7 +55,12 @@ class ConsoleWriter implements IOutlineWriter
                 /*
                  * But indent continuations of a line a little.
                  */
-                printf(" ");
+                for (int w = 0; w < wrappingIndentSize; w++)
+                {
+                    indent();
+                    printf(" ");
+                }
+                setCurrentLineLength(getCurrentLineLength() + wrappingIndentSize);
             } else
             {
                 aLine = lines[line];

@@ -29,7 +29,17 @@ public enum OutlineWriters
      * @author Chris DeGreef fedupforone@gmail.com
      *
      */
-    System;
+    System,
+
+    /**
+     * StringWriter.
+     *
+     * Saves the output to a String rather than writing it to an output.
+     *
+     * @author Chris DeGreef fedupforone@gmail.com
+     *
+     */
+    String;
 
     /**
      * <p>
@@ -48,6 +58,8 @@ public enum OutlineWriters
             return new ConsoleWriter(config);
         case System:
             return new SystemOutWriter(config);
+        case String:
+            return new StringWriter(config);
         default:
             break;
         }

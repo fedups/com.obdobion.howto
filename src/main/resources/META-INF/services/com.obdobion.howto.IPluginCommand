@@ -3,3 +3,4 @@ com.obdobion.howto.module.History
 com.obdobion.howto.module.MakeAPlugin
 com.obdobion.howto.module.InteractiveConsole
 com.obdobion.howto.module.Quit
+com.obdobion.howto.module.Empty

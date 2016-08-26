@@ -1,14 +1,10 @@
 package com.obdobion.howto;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.obdobion.howto.writer.IOutlineWriter;
 import com.obdobion.howto.writer.OutlineWriters;
@@ -22,18 +18,24 @@ import com.obdobion.howto.writer.OutlineWriters;
  */
 public class Outline
 {
-    private final static Logger logger = LoggerFactory.getLogger(Outline.class.getName());
+    Config         config;
+    IOutlineWriter writer;
+    String         contents;
 
-    Config                      config;
-    IOutlineWriter              writer;
-    String                      contents;
-    List<Outline>               children;
+    List<Outline>  children;
 
     Outline(final Config config)
     {
         super();
         this.config = config;
         writer = OutlineWriters.create(config);
+    }
+
+    Outline(final Outline parentOutline)
+    {
+        super();
+        config = parentOutline.config;
+        writer = parentOutline.writer;
     }
 
     /**
@@ -51,7 +53,7 @@ public class Outline
     {
         if (children == null)
             children = new ArrayList<>();
-        final Outline child = new Outline(config);
+        final Outline child = new Outline(this);
         child.setContents(childContents, childArguments);
         children.add(child);
         return child;
@@ -71,6 +73,11 @@ public class Outline
         return children.get(children.size() - 1).getCurrent();
     }
 
+    public IOutlineWriter getWriter()
+    {
+        return writer;
+    }
+
     /**
      * <p>
      * print.
@@ -84,20 +91,20 @@ public class Outline
         if (context.isSubcontext())
             return;
 
-        try (IOutlineWriter ow = OutlineWriters.create(config))
-        {
-            print(ow);
-
-        } catch (final IOException e)
-        {
-            logger.error("attempting to print outline", e);
-        }
+        // try (IOutlineWriter ow = OutlineWriters.create(config))
+        // {
+        print(getWriter());
+        //
+        // } catch (final IOException e)
+        // {
+        // logger.error("attempting to print outline", e);
+        // }
     }
 
     void print(final IOutlineWriter ow)
     {
         if (contents != null)
-            ow.append(contents.trim());
+            ow.append(contents.trim(), 1);
         if (children != null)
         {
             ow.increaseLevel();
@@ -107,12 +114,20 @@ public class Outline
         }
     }
 
+    public void printf(final int wrappingIndentSize, final String format, final Object... args)
+    {
+        final StringWriter sw = new StringWriter();
+        final PrintWriter pw = new PrintWriter(sw);
+        pw.printf(format, args);
+        writer.append(sw.toString(), wrappingIndentSize);
+    }
+
     public void printf(final String format, final Object... args)
     {
         final StringWriter sw = new StringWriter();
         final PrintWriter pw = new PrintWriter(sw);
         pw.printf(format, args);
-        writer.append(sw.toString());
+        writer.append(sw.toString(), 1);
     }
 
     public void reset()

@@ -2,10 +2,12 @@ package com.obdobion.howto.module;
 
 import java.io.Console;
 
+import org.apache.log4j.NDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.obdobion.howto.Context;
+import com.obdobion.howto.HistoryManager;
 import com.obdobion.howto.IPluginCommand;
 
 public class InteractiveConsole implements IPluginCommand
@@ -20,12 +22,14 @@ public class InteractiveConsole implements IPluginCommand
     private boolean             stop;
 
     public InteractiveConsole()
-    {}
+    {
+    }
 
     @Override
     public int execute(final Context p_context)
     {
         context = p_context;
+        context.setRecordingHistory(false);
         logger.debug("interactive console opened");
 
         setConsoleInputThread(new Thread()
@@ -44,18 +48,21 @@ public class InteractiveConsole implements IPluginCommand
                     return;
                 }
 
-                while (true)
+                NDC.push("IC");
+                try
                 {
-                    if (isStop())
-                        return;
-                    final String aLine = c.readLine("howto > ");
-                    if (aLine == null)
-                        return;
-                    if (aLine.trim().length() == 0)
-                        continue;
-
-                    processInputRequest(aLine.trim());
-
+                    while (true)
+                    {
+                        if (isStop())
+                            return;
+                        final String aLine = c.readLine("howto > ");
+                        if (aLine == null)
+                            return;
+                        processInputRequest(aLine.trim());
+                    }
+                } finally
+                {
+                    NDC.pop();
                 }
             }
         });
@@ -101,6 +108,13 @@ public class InteractiveConsole implements IPluginCommand
         return "Interactive console mode";
     }
 
+    /** {@inheritDoc} */
+    @Override
+    public boolean isOnceAndDone()
+    {
+        return true;
+    }
+
     /**
      * @return the stop
      */
@@ -117,7 +131,7 @@ public class InteractiveConsole implements IPluginCommand
 
         if (inputRequest.length() == 0)
         {
-            commandName = Menu.NAME;
+            commandName = Empty.GROUP + "." + Empty.NAME;
             arguments = "";
         } else
         {
@@ -140,13 +154,19 @@ public class InteractiveConsole implements IPluginCommand
             return;
         }
 
-        context.getPluginManager().run(context,
-                context.getPluginManager().uniqueNameFor(commandName),
-                arguments);
+        try
+        {
+            final Context subcommandContext = context.getPluginManager().run(context,
+                    context.getPluginManager().uniqueNameFor(commandName),
+                    arguments);
+            HistoryManager.getInstance().record(subcommandContext);
+            context.getOutline().print(context);
 
-        // histman.record(context);
-
-        context.getOutline().print(context);
+        } catch (final Exception e)
+        {
+            logger.error("{} unsuccessfull {}", commandName, e.getMessage());
+            context.getOutline().printf("%1$s", e.getMessage());
+        }
         context.getOutline().reset();
     }
 

@@ -37,7 +37,8 @@ public class Menu implements IPluginCommand
      * </p>
      */
     public Menu()
-    {}
+    {
+    }
 
     private boolean allMatchersMatch(final String output)
     {
@@ -72,13 +73,15 @@ public class Menu implements IPluginCommand
                     longestNameLength = pluginCommand.getName().length();
 
             } catch (final PluginNotFoundException e)
-            {}
+            {
+            }
         });
 
-        final String layout = "%1$-" + longestGroupLength + "s %2$" + longestNameLength + "s | %3$s\n";
+        final String headerLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s   %3$s\n";
+        final String detailLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s | %3$s\n";
 
-        context.getOutline().printf(layout, "Group", "Command", "Overview");
-        context.getOutline().printf(layout, "-----", "-------", "--------");
+        context.getOutline().printf(headerLayout, "Group", "Command", "Overview");
+        context.getOutline().printf(headerLayout, "-----", "-------", "--------");
 
         keys.forEach(pluginName -> {
             try
@@ -88,17 +91,24 @@ public class Menu implements IPluginCommand
                 {
                     final IPluginCommand pluginCommand = context.getPluginManager().get(pluginName);
 
-                    pw.printf(layout, pluginCommand.getGroup(), pluginCommand.getName(), pluginCommand.getOverview());
+                    pw.printf(detailLayout, pluginCommand.getGroup(), pluginCommand.getName(),
+                            pluginCommand.getOverview());
                     final String output = sw.toString();
 
-                    if (allMatchersMatch(output))
-                        context.getOutline().printf(sw.toString());
+                    if (allMatchersMatch(output)
+                            && !(pluginCommand.getGroup().equals(Empty.GROUP)
+                                    && pluginCommand.getName().equals(Empty.NAME)))
+                    {
+                        context.getOutline().printf(longestGroupLength + 1 + longestNameLength + 4, sw.toString());
+                        context.getOutline().printf("\n");
+                    }
                 }
             } catch (final PluginNotFoundException e)
-            {}
+            {
+            }
         });
 
-        context.getOutline().printf(layout, "-----", "-------", "--------");
+        context.getOutline().printf(headerLayout, "-----", "-------", "--------");
         return 0;
     }
 
@@ -120,6 +130,16 @@ public class Menu implements IPluginCommand
     @Override
     public String getOverview()
     {
-        return "Shows a list of commands";
+        return "Shows a list of available commands.  Use \"--help\" as an argument to any command to get details on that command."
+                + "  Commands can be just the name or group.name, "
+                + "  they can be abbreviated, or only caps (camelCaps), as long as what you enter can uniquely identify a command."
+                + " CamelCaps are the first letter followed by any remaining capital letters and numbers.";
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean isOnceAndDone()
+    {
+        return false;
     }
 }

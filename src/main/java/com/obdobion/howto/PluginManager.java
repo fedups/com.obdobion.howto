@@ -59,7 +59,7 @@ public class PluginManager
     static public Context createContext(final Context currentContextToCloneFrom)
     {
         final Context context = new Context();
-        context.setRecordingHistory(false);
+        context.setRecordingHistory(true);
         context.setSubcontext(true);
         context.setOutline(currentContextToCloneFrom.getOutline().getCurrent());
         context.setPluginManager(currentContextToCloneFrom.getPluginManager());
@@ -236,7 +236,8 @@ public class PluginManager
             return foundMatches[0];
 
         throw new PluginNotFoundException(
-                "A unique command was not found for \"" + name + "\".  Use 'howto menu' and try group.command.");
+                "A unique command was not found for \"" + name
+                        + "\".  Use 'menu' to see valid commands.");
     }
 
     /**
@@ -272,19 +273,40 @@ public class PluginManager
     {
         final IPluginCommand command = get(commandName);
 
-        context.setParser(new CmdLine(command.getName(), command.getOverview()));
-        CmdLine.load(context.getParser(), command, args);
-        if (((CmdLine) context.getParser()).isUsageRun())
-            return null;
+        NDC.push(command.getName());
 
-        final StringBuilder loggableArgs = new StringBuilder();
-        context.getParser().exportCommandLine(loggableArgs);
-        logger.info("{}", loggableArgs);
+        try
+        {
+            context.setParser(new CmdLine(command.getName(), command.getOverview()));
+            CmdLine.load(context.getParser(), command, args);
+            if (((CmdLine) context.getParser()).isUsageRun())
+                return null;
 
-        context.setStartTime(System.nanoTime());
-        command.execute(context);
-        context.setEndTime(System.nanoTime());
-        return context;
+            final StringBuilder loggableArgs = new StringBuilder();
+            context.getParser().exportCommandLine(loggableArgs);
+            logger.info("{}", loggableArgs);
+
+            if (command.isOnceAndDone())
+                remove(command);
+
+            context.setStartTime(System.nanoTime());
+            command.execute(context);
+            context.setEndTime(System.nanoTime());
+            return context;
+        } finally
+        {
+            NDC.pop();
+        }
+    }
+
+    boolean remove(final IPluginCommand command)
+    {
+        if (allPlugins == null)
+            return true;
+        final boolean rc = allPlugins.remove(command);
+        if (rc)
+            logger.debug("removed \"{}.{}\" from menu", command.getGroup(), command.getName());
+        return rc;
     }
 
     /**
@@ -304,8 +326,11 @@ public class PluginManager
      * @param args
      *            a {@link java.lang.Object} object.
      * @return a {@link com.obdobion.howto.Context} object.
+     * @throws ParseException
+     * @throws IOException
      */
     public Context run(final Context parentContext, final String commandName, final String format, final Object... args)
+            throws PluginNotFoundException, IOException, ParseException
     {
         final Context context = createContext(parentContext);
         String cmdlineArgs = null;
@@ -317,20 +342,7 @@ public class PluginManager
             cmdlineArgs = sw.toString();
         }
 
-        NDC.push(commandName);
-        try
-        {
-            return privateRun(context, commandName, cmdlineArgs);
-        } catch (final Exception e)
-        {
-            logger.error("{}: {}", commandName, e.getMessage(), e);
-            context.getOutline().add("SEE: howto %1$s %2$s", commandName, cmdlineArgs);
-
-        } finally
-        {
-            NDC.pop();
-        }
-        return null;
+        return privateRun(context, commandName, cmdlineArgs);
     }
 
     /**

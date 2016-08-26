@@ -54,7 +54,8 @@ public class MakeAPlugin implements IPluginCommand
      * </p>
      */
     public MakeAPlugin()
-    {}
+    {
+    }
 
     /** {@inheritDoc} */
     @Override
@@ -92,6 +93,13 @@ public class MakeAPlugin implements IPluginCommand
     public String getOverview()
     {
         return "Want to make a plugin? - this is how to do it.";
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean isOnceAndDone()
+    {
+        return false;
     }
 
     private void showAddServicesFile(final Outline ol)

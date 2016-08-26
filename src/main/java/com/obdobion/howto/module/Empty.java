@@ -14,17 +14,17 @@ import com.obdobion.howto.IPluginCommand;
  *
  * @author Chris DeGreef fedupforone@gmail.com
  */
-public class Quit implements IPluginCommand
+public class Empty implements IPluginCommand
 {
-    static public final String GROUP = InteractiveConsole.GROUP;
-    static public final String NAME  = "quit";
+    static public final String GROUP = Menu.GROUP;
+    static public final String NAME  = "empty";
 
     /**
      * <p>
      * Constructor for Quit.
      * </p>
      */
-    public Quit()
+    public Empty()
     {
     }
 
@@ -33,6 +33,7 @@ public class Quit implements IPluginCommand
     public int execute(final Context context)
     {
         context.setRecordingHistory(false);
+        context.getOutline().printf("Try \"menu\" or \"menu --help\"");
         return 0;
     }
 
@@ -54,13 +55,13 @@ public class Quit implements IPluginCommand
     @Override
     public String getOverview()
     {
-        return "Ends an interactive session";
+        return "Shows a minimal help message";
     }
 
     /** {@inheritDoc} */
     @Override
     public boolean isOnceAndDone()
     {
-        return true;
+        return false;
     }
 }
