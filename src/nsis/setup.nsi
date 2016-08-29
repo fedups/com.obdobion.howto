@@ -79,10 +79,8 @@ Section "howto"
 
     !insertmacro _ReplaceInFile howto.cfg !{VERSION} ${PROJECT_VERSION}
     !insertmacro _ReplaceInFile howto.cfg !{INSTDIR} $INSTDIR
-    !insertmacro _ReplaceInFile howto.cfg !{APPDATA} $APPDATA
     !insertmacro _ReplaceInFile howtodebug.cfg !{VERSION} ${PROJECT_VERSION}
     !insertmacro _ReplaceInFile howtodebug.cfg !{INSTDIR} $INSTDIR
-    !insertmacro _ReplaceInFile howtodebug.cfg !{APPDATA} $APPDATA
 
     File ..\..\target\mavenDependenciesForNSIS\*.jar
     File /x *source* ..\..\target\howto-${PROJECT_VERSION}.jar
