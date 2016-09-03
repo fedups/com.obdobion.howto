@@ -27,8 +27,7 @@ public class Quit implements IPluginCommand
      * </p>
      */
     public Quit()
-    {
-    }
+    {}
 
     /** {@inheritDoc} */
     @Override

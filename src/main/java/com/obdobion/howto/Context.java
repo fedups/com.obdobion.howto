@@ -140,8 +140,7 @@ final public class Context
      * Setter for the field <code>consoleErrorOutput</code>.
      * </p>
      *
-     * @param pw
-     *            a {@link java.io.PrintWriter} object.
+     * @param pw a {@link java.io.PrintWriter} object.
      */
     public void setConsoleErrorOutput(final PrintWriter pw)
     {
@@ -153,8 +152,7 @@ final public class Context
      * setEndTime.
      * </p>
      *
-     * @param nanoTime
-     *            a long.
+     * @param nanoTime a long.
      */
     public void setEndTime(final long nanoTime)
     {
@@ -167,8 +165,7 @@ final public class Context
     }
 
     /**
-     * @param outline
-     *            the outline to set
+     * @param outline the outline to set
      */
     void setOutline(final Outline outline)
     {
@@ -180,8 +177,7 @@ final public class Context
      * setParser.
      * </p>
      *
-     * @param myParser
-     *            a {@link com.obdobion.argument.ICmdLine} object.
+     * @param myParser a {@link com.obdobion.argument.ICmdLine} object.
      */
     public void setParser(final ICmdLine myParser)
     {
@@ -193,8 +189,7 @@ final public class Context
      * Setter for the field <code>pluginManager</code>.
      * </p>
      *
-     * @param pluginManager
-     *            a {@link com.obdobion.howto.PluginManager} object.
+     * @param pluginManager a {@link com.obdobion.howto.PluginManager} object.
      */
     public void setPluginManager(final PluginManager pluginManager)
     {
@@ -206,8 +201,7 @@ final public class Context
      * Setter for the field <code>recordingHistory</code>.
      * </p>
      *
-     * @param recordingHistory
-     *            a boolean.
+     * @param recordingHistory a boolean.
      */
     public void setRecordingHistory(final boolean recordingHistory)
     {
@@ -219,8 +213,7 @@ final public class Context
      * setStartTime.
      * </p>
      *
-     * @param nanoTime
-     *            a long.
+     * @param nanoTime a long.
      */
     public void setStartTime(final long nanoTime)
     {

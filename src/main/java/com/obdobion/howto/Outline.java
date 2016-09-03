@@ -43,10 +43,8 @@ public class Outline
      * add.
      * </p>
      *
-     * @param childContents
-     *            a {@link java.lang.String} object.
-     * @param childArguments
-     *            a {@link java.lang.Object} object.
+     * @param childContents a {@link java.lang.String} object.
+     * @param childArguments a {@link java.lang.Object} object.
      * @return a {@link com.obdobion.howto.Outline} object.
      */
     public Outline add(final String childContents, final Object... childArguments)
@@ -74,7 +72,9 @@ public class Outline
     }
 
     /**
-     * <p>Getter for the field <code>writer</code>.</p>
+     * <p>
+     * Getter for the field <code>writer</code>.
+     * </p>
      *
      * @return a {@link com.obdobion.howto.writer.IOutlineWriter} object.
      */
@@ -88,8 +88,7 @@ public class Outline
      * print.
      * </p>
      *
-     * @param context
-     *            a {@link com.obdobion.howto.Context} object.
+     * @param context a {@link com.obdobion.howto.Context} object.
      */
     public void print(final Context context)
     {
@@ -120,7 +119,9 @@ public class Outline
     }
 
     /**
-     * <p>printf.</p>
+     * <p>
+     * printf.
+     * </p>
      *
      * @param wrappingIndentSize a int.
      * @param format a {@link java.lang.String} object.
@@ -135,7 +136,9 @@ public class Outline
     }
 
     /**
-     * <p>printf.</p>
+     * <p>
+     * printf.
+     * </p>
      *
      * @param format a {@link java.lang.String} object.
      * @param args a {@link java.lang.Object} object.
@@ -149,7 +152,9 @@ public class Outline
     }
 
     /**
-     * <p>reset.</p>
+     * <p>
+     * reset.
+     * </p>
      */
     public void reset()
     {
@@ -162,10 +167,8 @@ public class Outline
      * Setter for the field <code>contents</code>.
      * </p>
      *
-     * @param contents
-     *            a {@link java.lang.String} object.
-     * @param arguments
-     *            a {@link java.lang.Object} object.
+     * @param contents a {@link java.lang.String} object.
+     * @param arguments a {@link java.lang.Object} object.
      */
     public void setContents(final String contents, final Object... arguments)
     {

@@ -65,8 +65,7 @@ public class HistoryManager
      * Constructor for HistoryManager.
      * </p>
      *
-     * @param config
-     *            a {@link com.obdobion.howto.Config} object.
+     * @param config a {@link com.obdobion.howto.Config} object.
      */
     public HistoryManager(final Config config)
     {
@@ -108,8 +107,7 @@ public class HistoryManager
      * record.
      * </p>
      *
-     * @param context
-     *            a {@link com.obdobion.howto.Context} object.
+     * @param context a {@link com.obdobion.howto.Context} object.
      */
     public void record(final Context context)
     {

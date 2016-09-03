@@ -40,8 +40,7 @@ public class History implements IPluginCommand
      * </p>
      */
     public History()
-    {
-    }
+    {}
 
     private boolean allMatchersMatch(final String output)
     {

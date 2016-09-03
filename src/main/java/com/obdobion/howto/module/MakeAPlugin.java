@@ -56,8 +56,7 @@ public class MakeAPlugin implements IPluginCommand
      * </p>
      */
     public MakeAPlugin()
-    {
-    }
+    {}
 
     /** {@inheritDoc} */
     @Override
@@ -125,7 +124,8 @@ public class MakeAPlugin implements IPluginCommand
         ol.add("cd %s", domainName);
 
         final Outline gb = ol.add("Run this Maven command");
-        gb.add("mvn archetype:generate -DgroupId=%s -DartifactId=howto.%s -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false",
+        gb.add(
+                "mvn archetype:generate -DgroupId=%s -DartifactId=howto.%s -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false",
                 domainName, groupName.toLowerCase());
         gb.add("Need a download? %s", "https://git-scm.com/download/win");
 

@@ -39,8 +39,7 @@ public class Menu implements IPluginCommand
      * </p>
      */
     public Menu()
-    {
-    }
+    {}
 
     private boolean allMatchersMatch(final String output)
     {
@@ -75,8 +74,7 @@ public class Menu implements IPluginCommand
                     longestNameLength = pluginCommand.getName().length();
 
             } catch (final PluginNotFoundException e)
-            {
-            }
+            {}
         });
 
         final String headerLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s   %3$s\n";
@@ -106,8 +104,7 @@ public class Menu implements IPluginCommand
                     }
                 }
             } catch (final PluginNotFoundException e)
-            {
-            }
+            {}
         });
 
         context.getOutline().printf(headerLayout, "-----", "-------", "--------");

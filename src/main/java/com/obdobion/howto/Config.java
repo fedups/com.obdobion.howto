@@ -21,7 +21,9 @@ import com.obdobion.argument.type.WildFiles;
 import com.obdobion.howto.writer.OutlineWriters;
 
 /**
- * <p>Config class.</p>
+ * <p>
+ * Config class.
+ * </p>
  *
  * @author Chris DeGreef fedupforone@gmail.com
  */
@@ -58,7 +60,9 @@ final public class Config
                                                       "junit|commons-codec|slf4j|log4j|algebrain|argument|calendar|howto-[.0-9]+jar");
 
     /**
-     * <p>Constructor for Config.</p>
+     * <p>
+     * Constructor for Config.
+     * </p>
      *
      * @param appDir a {@link java.lang.String} object.
      * @throws java.io.IOException if any.
@@ -83,7 +87,9 @@ final public class Config
     }
 
     /**
-     * <p>getHistoryFile.</p>
+     * <p>
+     * getHistoryFile.
+     * </p>
      *
      * @return a {@link java.io.File} object.
      */
@@ -93,7 +99,9 @@ final public class Config
     }
 
     /**
-     * <p>Getter for the field <code>log4jConfigFileName</code>.</p>
+     * <p>
+     * Getter for the field <code>log4jConfigFileName</code>.
+     * </p>
      *
      * @return a {@link java.lang.String} object.
      */
@@ -103,7 +111,9 @@ final public class Config
     }
 
     /**
-     * <p>Getter for the field <code>outlineIndentSize</code>.</p>
+     * <p>
+     * Getter for the field <code>outlineIndentSize</code>.
+     * </p>
      *
      * @return a int.
      */
@@ -113,7 +123,9 @@ final public class Config
     }
 
     /**
-     * <p>Getter for the field <code>outlineWidth</code>.</p>
+     * <p>
+     * Getter for the field <code>outlineWidth</code>.
+     * </p>
      *
      * @return a int.
      */
@@ -123,7 +135,9 @@ final public class Config
     }
 
     /**
-     * <p>Getter for the field <code>pluginClassLoader</code>.</p>
+     * <p>
+     * Getter for the field <code>pluginClassLoader</code>.
+     * </p>
      *
      * @return a {@link java.lang.ClassLoader} object.
      */
@@ -151,7 +165,9 @@ final public class Config
     }
 
     /**
-     * <p>Getter for the field <code>writerType</code>.</p>
+     * <p>
+     * Getter for the field <code>writerType</code>.
+     * </p>
      *
      * @return a {@link com.obdobion.howto.writer.OutlineWriters} object.
      */
@@ -174,7 +190,9 @@ final public class Config
     }
 
     /**
-     * <p>saveToDisk.</p>
+     * <p>
+     * saveToDisk.
+     * </p>
      *
      * @throws java.text.ParseException if any.
      * @throws java.io.IOException if any.

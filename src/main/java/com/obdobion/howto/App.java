@@ -26,8 +26,7 @@ final public class App
      * destroyContext.
      * </p>
      *
-     * @param context
-     *            a {@link com.obdobion.howto.Context} object.
+     * @param context a {@link com.obdobion.howto.Context} object.
      */
     static public void destroyContext(final Context context)
     {
@@ -41,8 +40,7 @@ final public class App
      * main.
      * </p>
      *
-     * @param args
-     *            an array of {@link java.lang.String} objects.
+     * @param args an array of {@link java.lang.String} objects.
      */
     public static void main(final String[] args)
     {

@@ -14,8 +14,7 @@ public interface IPluginCommand
      * execute.
      * </p>
      *
-     * @param context
-     *            a {@link com.obdobion.howto.Context} object.
+     * @param context a {@link com.obdobion.howto.Context} object.
      * @return a int.
      */
     int execute(Context context);
@@ -48,7 +47,9 @@ public interface IPluginCommand
     String getOverview();
 
     /**
-     * <p>isOnceAndDone.</p>
+     * <p>
+     * isOnceAndDone.
+     * </p>
      *
      * @return a boolean.
      */

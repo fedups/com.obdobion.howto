@@ -11,7 +11,9 @@ import com.obdobion.howto.HistoryManager;
 import com.obdobion.howto.IPluginCommand;
 
 /**
- * <p>InteractiveConsole class.</p>
+ * <p>
+ * InteractiveConsole class.
+ * </p>
  *
  * @author Chris DeGreef fedupforone@gmail.com
  */
@@ -29,11 +31,12 @@ public class InteractiveConsole implements IPluginCommand
     private boolean             stop;
 
     /**
-     * <p>Constructor for InteractiveConsole.</p>
+     * <p>
+     * Constructor for InteractiveConsole.
+     * </p>
      */
     public InteractiveConsole()
-    {
-    }
+    {}
 
     /** {@inheritDoc} */
     @Override
@@ -182,8 +185,7 @@ public class InteractiveConsole implements IPluginCommand
     }
 
     /**
-     * @param consoleInputThread
-     *            the consoleInputThread to set
+     * @param consoleInputThread the consoleInputThread to set
      */
     void setConsoleInputThread(final Thread consoleInputThread)
     {
@@ -192,8 +194,7 @@ public class InteractiveConsole implements IPluginCommand
     }
 
     /**
-     * @param stop
-     *            the stop to set
+     * @param stop the stop to set
      */
     void setStop(final boolean stop)
     {

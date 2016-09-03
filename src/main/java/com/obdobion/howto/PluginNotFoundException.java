@@ -1,14 +1,18 @@
 package com.obdobion.howto;
 
 /**
- * <p>PluginNotFoundException class.</p>
+ * <p>
+ * PluginNotFoundException class.
+ * </p>
  *
  * @author Chris DeGreef fedupforone@gmail.com
  */
 public class PluginNotFoundException extends Exception
 {
     /**
-     * <p>Constructor for PluginNotFoundException.</p>
+     * <p>
+     * Constructor for PluginNotFoundException.
+     * </p>
      *
      * @param message a {@link java.lang.String} object.
      */
@@ -18,7 +22,9 @@ public class PluginNotFoundException extends Exception
     }
 
     /**
-     * <p>Constructor for PluginNotFoundException.</p>
+     * <p>
+     * Constructor for PluginNotFoundException.
+     * </p>
      *
      * @param message a {@link java.lang.String} object.
      * @param cause a {@link java.lang.Throwable} object.
@@ -29,7 +35,9 @@ public class PluginNotFoundException extends Exception
     }
 
     /**
-     * <p>Constructor for PluginNotFoundException.</p>
+     * <p>
+     * Constructor for PluginNotFoundException.
+     * </p>
      *
      * @param message a {@link java.lang.String} object.
      * @param cause a {@link java.lang.Throwable} object.
@@ -45,7 +53,9 @@ public class PluginNotFoundException extends Exception
     }
 
     /**
-     * <p>Constructor for PluginNotFoundException.</p>
+     * <p>
+     * Constructor for PluginNotFoundException.
+     * </p>
      *
      * @param cause a {@link java.lang.Throwable} object.
      */

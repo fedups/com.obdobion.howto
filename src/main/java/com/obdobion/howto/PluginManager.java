@@ -31,10 +31,8 @@ public class PluginManager
      * createContext.
      * </p>
      *
-     * @param config
-     *            a {@link com.obdobion.howto.Config} object.
-     * @param pluginManager
-     *            a {@link com.obdobion.howto.PluginManager} object.
+     * @param config a {@link com.obdobion.howto.Config} object.
+     * @param pluginManager a {@link com.obdobion.howto.PluginManager} object.
      * @return a {@link com.obdobion.howto.Context} object.
      */
     static public Context createContext(final Config config, final PluginManager pluginManager)
@@ -52,8 +50,8 @@ public class PluginManager
      * createContext.
      * </p>
      *
-     * @param currentContextToCloneFrom
-     *            a {@link com.obdobion.howto.Context} object.
+     * @param currentContextToCloneFrom a {@link com.obdobion.howto.Context}
+     *            object.
      * @return a {@link com.obdobion.howto.Context} object.
      */
     static public Context createContext(final Context currentContextToCloneFrom)
@@ -75,8 +73,7 @@ public class PluginManager
      * Constructor for PluginManager.
      * </p>
      *
-     * @param config
-     *            a {@link com.obdobion.howto.Config} object.
+     * @param config a {@link com.obdobion.howto.Config} object.
      */
     public PluginManager(final Config config)
     {
@@ -102,11 +99,9 @@ public class PluginManager
      * get.
      * </p>
      *
-     * @param commandId
-     *            a {@link java.lang.String} object.
+     * @param commandId a {@link java.lang.String} object.
      * @return a {@link com.obdobion.howto.IPluginCommand} object.
-     * @throws com.obdobion.howto.PluginNotFoundException
-     *             if any.
+     * @throws com.obdobion.howto.PluginNotFoundException if any.
      */
     public IPluginCommand get(final String commandId) throws PluginNotFoundException
     {
@@ -318,21 +313,14 @@ public class PluginManager
      * it is not a loaded plugin then a simple "SEE" reference will be written
      * instead.
      *
-     * @param parentContext
-     *            a {@link com.obdobion.howto.Context} object.
-     * @param commandName
-     *            a {@link java.lang.String} object.
-     * @param format
-     *            a {@link java.lang.String} object.
-     * @param args
-     *            a {@link java.lang.Object} object.
+     * @param parentContext a {@link com.obdobion.howto.Context} object.
+     * @param commandName a {@link java.lang.String} object.
+     * @param format a {@link java.lang.String} object.
+     * @param args a {@link java.lang.Object} object.
      * @return a {@link com.obdobion.howto.Context} object.
-     * @throws java.text.ParseException
-     *             if any.
-     * @throws java.io.IOException
-     *             if any.
-     * @throws com.obdobion.howto.PluginNotFoundException
-     *             if any.
+     * @throws java.text.ParseException if any.
+     * @throws java.io.IOException if any.
+     * @throws com.obdobion.howto.PluginNotFoundException if any.
      */
     public Context run(final Context parentContext, final String commandName, final String format, final Object... args)
             throws PluginNotFoundException, IOException, ParseException
@@ -354,17 +342,12 @@ public class PluginManager
      * run.
      * </p>
      *
-     * @param commandName
-     *            a {@link java.lang.String} object.
-     * @param args
-     *            a {@link java.lang.String} object.
+     * @param commandName a {@link java.lang.String} object.
+     * @param args a {@link java.lang.String} object.
      * @return a {@link com.obdobion.howto.Context} object.
-     * @throws com.obdobion.howto.PluginNotFoundException
-     *             if any.
-     * @throws java.io.IOException
-     *             if any.
-     * @throws java.text.ParseException
-     *             if any.
+     * @throws com.obdobion.howto.PluginNotFoundException if any.
+     * @throws java.io.IOException if any.
+     * @throws java.text.ParseException if any.
      */
     public Context run(final String commandName, final String... args)
             throws PluginNotFoundException, IOException, ParseException
@@ -377,8 +360,7 @@ public class PluginManager
      * uniqueNameFor.
      * </p>
      *
-     * @param name
-     *            a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     public String uniqueNameFor(final String name)
@@ -398,10 +380,8 @@ public class PluginManager
      * uniqueNameFor.
      * </p>
      *
-     * @param group
-     *            a {@link java.lang.String} object.
-     * @param name
-     *            a {@link java.lang.String} object.
+     * @param group a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
      * @return a {@link java.lang.String} object.
      */
     public String uniqueNameFor(final String group, final String name)

@@ -46,22 +46,21 @@ public enum OutlineWriters
      * create.
      * </p>
      *
-     * @param config
-     *            a {@link com.obdobion.howto.Config} object.
+     * @param config a {@link com.obdobion.howto.Config} object.
      * @return a {@link com.obdobion.howto.writer.IOutlineWriter} object.
      */
     static final public IOutlineWriter create(final Config config)
     {
         switch (config.getWriterType())
         {
-        case Console:
-            return new ConsoleWriter(config);
-        case System:
-            return new SystemOutWriter(config);
-        case String:
-            return new StringWriter(config);
-        default:
-            break;
+            case Console:
+                return new ConsoleWriter(config);
+            case System:
+                return new SystemOutWriter(config);
+            case String:
+                return new StringWriter(config);
+            default:
+                break;
         }
         return new ConsoleWriter(config);
     }

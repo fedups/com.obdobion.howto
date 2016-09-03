@@ -3,7 +3,9 @@ package com.obdobion.howto;
 import org.junit.Test;
 
 /**
- * <p>AppTest class.</p>
+ * <p>
+ * AppTest class.
+ * </p>
  *
  * @author Chris DeGreef fedupforone@gmail.com
  * @since 0.0.3
@@ -11,7 +13,9 @@ import org.junit.Test;
 public class AppTest
 {
     /**
-     * <p>historyNoArgs.</p>
+     * <p>
+     * historyNoArgs.
+     * </p>
      *
      * @throws java.lang.Exception if any.
      */
@@ -22,7 +26,9 @@ public class AppTest
     }
 
     /**
-     * <p>historyWithArgs.</p>
+     * <p>
+     * historyWithArgs.
+     * </p>
      *
      * @throws java.lang.Exception if any.
      */
@@ -33,7 +39,9 @@ public class AppTest
     }
 
     /**
-     * <p>makeAPlugin.</p>
+     * <p>
+     * makeAPlugin.
+     * </p>
      *
      * @throws java.lang.Exception if any.
      */
@@ -44,7 +52,9 @@ public class AppTest
     }
 
     /**
-     * <p>menuNoArgs.</p>
+     * <p>
+     * menuNoArgs.
+     * </p>
      *
      * @throws java.lang.Exception if any.
      */
@@ -55,7 +65,9 @@ public class AppTest
     }
 
     /**
-     * <p>menuWithArgs.</p>
+     * <p>
+     * menuWithArgs.
+     * </p>
      *
      * @throws java.lang.Exception if any.
      */

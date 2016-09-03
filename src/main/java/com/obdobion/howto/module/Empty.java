@@ -27,8 +27,7 @@ public class Empty implements IPluginCommand
      * </p>
      */
     public Empty()
-    {
-    }
+    {}
 
     /** {@inheritDoc} */
     @Override

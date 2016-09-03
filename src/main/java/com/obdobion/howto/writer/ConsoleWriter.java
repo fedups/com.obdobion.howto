@@ -100,8 +100,7 @@ class ConsoleWriter implements IOutlineWriter
     /** {@inheritDoc} */
     @Override
     public void close() throws IOException
-    {
-    }
+    {}
 
     /** {@inheritDoc} */
     @Override
@@ -178,8 +177,8 @@ class ConsoleWriter implements IOutlineWriter
     }
 
     /**
-     * @param currentIndentLevelForWrapping
-     *            the currentIndentLevelForWrapping to set
+     * @param currentIndentLevelForWrapping the currentIndentLevelForWrapping to
+     *            set
      */
     void setCurrentIndentLevelForWrapping(final int currentIndentLevelForWrapping)
     {
@@ -187,8 +186,7 @@ class ConsoleWriter implements IOutlineWriter
     }
 
     /**
-     * @param currentLineLength
-     *            the currentLineLength to set
+     * @param currentLineLength the currentLineLength to set
      */
     void setCurrentLineLength(final int currentLineLength)
     {
@@ -196,8 +194,7 @@ class ConsoleWriter implements IOutlineWriter
     }
 
     /**
-     * @param newLineCount
-     *            the newLineCount to set
+     * @param newLineCount the newLineCount to set
      */
     void setNewLineCount(final int newLineCount)
     {
