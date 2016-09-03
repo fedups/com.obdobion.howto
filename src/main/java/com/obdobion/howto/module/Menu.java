@@ -19,7 +19,9 @@ import com.obdobion.howto.PluginNotFoundException;
  */
 public class Menu implements IPluginCommand
 {
+    /** Constant <code>GROUP="System"</code> */
     static public final String GROUP              = "System";
+    /** Constant <code>NAME="menu"</code> */
     static public final String NAME               = "menu";
 
     @Arg(shortName = 'm', help = "Only commands matching all patterns will be displayed.")

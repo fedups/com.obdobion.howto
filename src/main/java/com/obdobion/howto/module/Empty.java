@@ -16,7 +16,9 @@ import com.obdobion.howto.IPluginCommand;
  */
 public class Empty implements IPluginCommand
 {
+    /** Constant <code>GROUP="Menu.GROUP"</code> */
     static public final String GROUP = Menu.GROUP;
+    /** Constant <code>NAME="empty"</code> */
     static public final String NAME  = "empty";
 
     /**

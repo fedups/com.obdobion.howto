@@ -58,6 +58,7 @@ class StringWriter extends ConsoleWriter
         console.flush();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {

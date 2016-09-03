@@ -47,5 +47,10 @@ public interface IPluginCommand
      */
     String getOverview();
 
+    /**
+     * <p>isOnceAndDone.</p>
+     *
+     * @return a boolean.
+     */
     boolean isOnceAndDone();
 }

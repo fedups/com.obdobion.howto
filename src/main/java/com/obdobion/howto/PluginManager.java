@@ -277,6 +277,7 @@ public class PluginManager
 
         try
         {
+            context.setOriginalUserInput(Context.convertToString(args));
             context.setParser(new CmdLine(command.getName(), command.getOverview()));
             CmdLine.load(context.getParser(), command, args);
             if (((CmdLine) context.getParser()).isUsageRun())
@@ -326,8 +327,12 @@ public class PluginManager
      * @param args
      *            a {@link java.lang.Object} object.
      * @return a {@link com.obdobion.howto.Context} object.
-     * @throws ParseException
-     * @throws IOException
+     * @throws java.text.ParseException
+     *             if any.
+     * @throws java.io.IOException
+     *             if any.
+     * @throws com.obdobion.howto.PluginNotFoundException
+     *             if any.
      */
     public Context run(final Context parentContext, final String commandName, final String format, final Object... args)
             throws PluginNotFoundException, IOException, ParseException
@@ -341,7 +346,6 @@ public class PluginManager
             pw.printf(format, args);
             cmdlineArgs = sw.toString();
         }
-
         return privateRun(context, commandName, cmdlineArgs);
     }
 

@@ -19,6 +19,7 @@ public interface IOutlineWriter extends Closeable
      *
      * @param trim
      *            a {@link java.lang.String} object.
+     * @param wrappingIndentSize a int.
      */
     void append(String trim, int wrappingIndentSize);
 

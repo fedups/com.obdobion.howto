@@ -10,21 +10,32 @@ import com.obdobion.howto.Context;
 import com.obdobion.howto.HistoryManager;
 import com.obdobion.howto.IPluginCommand;
 
+/**
+ * <p>InteractiveConsole class.</p>
+ *
+ * @author Chris DeGreef fedupforone@gmail.com
+ */
 public class InteractiveConsole implements IPluginCommand
 {
     private final static Logger logger = LoggerFactory.getLogger(InteractiveConsole.class.getName());
 
+    /** Constant <code>GROUP="IC"</code> */
     public static final String  GROUP  = "IC";
+    /** Constant <code>NAME="interactiveConsole"</code> */
     public static final String  NAME   = "interactiveConsole";
 
     private Context             context;
     private Thread              consoleInputThread;
     private boolean             stop;
 
+    /**
+     * <p>Constructor for InteractiveConsole.</p>
+     */
     public InteractiveConsole()
     {
     }
 
+    /** {@inheritDoc} */
     @Override
     public int execute(final Context p_context)
     {

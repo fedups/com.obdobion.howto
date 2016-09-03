@@ -16,7 +16,9 @@ import com.obdobion.howto.IPluginCommand;
  */
 public class Quit implements IPluginCommand
 {
+    /** Constant <code>GROUP="InteractiveConsole.GROUP"</code> */
     static public final String GROUP = InteractiveConsole.GROUP;
+    /** Constant <code>NAME="quit"</code> */
     static public final String NAME  = "quit";
 
     /**

@@ -14,7 +14,9 @@ import com.obdobion.howto.Outline;
  */
 public class MakeAPlugin implements IPluginCommand
 {
+    /** Constant <code>GROUP="Menu.GROUP"</code> */
     static public final String GROUP = Menu.GROUP;
+    /** Constant <code>NAME="makeAPlugin"</code> */
     static public final String NAME  = "makeAPlugin";
 
     @Arg(matches = "[a-z][a-zA-Z0-9]*",

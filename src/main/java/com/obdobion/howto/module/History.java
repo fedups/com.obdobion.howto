@@ -23,7 +23,9 @@ public class History implements IPluginCommand
 {
     private final static Logger logger = LoggerFactory.getLogger(History.class.getName());
 
+    /** Constant <code>GROUP="Menu.GROUP"</code> */
     static public final String  GROUP  = Menu.GROUP;
+    /** Constant <code>NAME="history"</code> */
     static public final String  NAME   = "history";
 
     @Arg(shortName = 'm', help = "Only history matching all patterns will be displayed.", caseSensitive = true)

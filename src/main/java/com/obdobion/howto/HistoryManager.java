@@ -12,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p>HistoryManager class.</p>
+ * <p>
+ * HistoryManager class.
+ * </p>
  *
  * @author Chris DeGreef fedupforone@gmail.com
  */
@@ -45,7 +47,9 @@ public class HistoryManager
     static private HistoryManager instance;
 
     /**
-     * <p>Getter for the field <code>instance</code>.</p>
+     * <p>
+     * Getter for the field <code>instance</code>.
+     * </p>
      *
      * @return a {@link com.obdobion.howto.HistoryManager} object.
      */
@@ -57,9 +61,12 @@ public class HistoryManager
     private final Config config;
 
     /**
-     * <p>Constructor for HistoryManager.</p>
+     * <p>
+     * Constructor for HistoryManager.
+     * </p>
      *
-     * @param config a {@link com.obdobion.howto.Config} object.
+     * @param config
+     *            a {@link com.obdobion.howto.Config} object.
      */
     public HistoryManager(final Config config)
     {
@@ -68,7 +75,9 @@ public class HistoryManager
     }
 
     /**
-     * <p>getHistory.</p>
+     * <p>
+     * getHistory.
+     * </p>
      *
      * @return a {@link java.util.List} object.
      */
@@ -95,9 +104,12 @@ public class HistoryManager
     }
 
     /**
-     * <p>record.</p>
+     * <p>
+     * record.
+     * </p>
      *
-     * @param context a {@link com.obdobion.howto.Context} object.
+     * @param context
+     *            a {@link com.obdobion.howto.Context} object.
      */
     public void record(final Context context)
     {
@@ -113,7 +125,7 @@ public class HistoryManager
             final StringBuilder historyContents = new StringBuilder();
             historyContents.append(context.getParser().getName());
             historyContents.append(" ");
-            context.getParser().exportCommandLine(historyContents);
+            historyContents.append(context.getOriginalUserInput());
             bw.write(historyContents.toString());
             bw.newLine();
 

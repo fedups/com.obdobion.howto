@@ -13,6 +13,17 @@ import com.obdobion.argument.ICmdLine;
  */
 final public class Context
 {
+    public static String convertToString(final String[] args)
+    {
+        final StringBuffer str = new StringBuffer();
+        for (int c = 0; c < args.length; c++)
+        {
+            str.append(args[c]);
+            str.append(" ");
+        }
+        return str.toString();
+    }
+
     private PluginManager pluginManager;
     private PrintWriter   consoleErrorOutput;
     private ICmdLine      myParser;
@@ -21,6 +32,7 @@ final public class Context
     private boolean       recordingHistory;
     private Outline       outline;
     private boolean       subcontext;
+    private String        originalUserInput;
 
     /**
      * <p>
@@ -44,6 +56,11 @@ final public class Context
     public long getEndTime()
     {
         return endNanoTime;
+    }
+
+    public String getOriginalUserInput()
+    {
+        return originalUserInput;
     }
 
     /**
@@ -142,6 +159,11 @@ final public class Context
     public void setEndTime(final long nanoTime)
     {
         endNanoTime = nanoTime;
+    }
+
+    public void setOriginalUserInput(final String originalUserInput)
+    {
+        this.originalUserInput = originalUserInput;
     }
 
     /**

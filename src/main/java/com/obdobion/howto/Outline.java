@@ -73,6 +73,11 @@ public class Outline
         return children.get(children.size() - 1).getCurrent();
     }
 
+    /**
+     * <p>Getter for the field <code>writer</code>.</p>
+     *
+     * @return a {@link com.obdobion.howto.writer.IOutlineWriter} object.
+     */
     public IOutlineWriter getWriter()
     {
         return writer;
@@ -114,6 +119,13 @@ public class Outline
         }
     }
 
+    /**
+     * <p>printf.</p>
+     *
+     * @param wrappingIndentSize a int.
+     * @param format a {@link java.lang.String} object.
+     * @param args a {@link java.lang.Object} object.
+     */
     public void printf(final int wrappingIndentSize, final String format, final Object... args)
     {
         final StringWriter sw = new StringWriter();
@@ -122,6 +134,12 @@ public class Outline
         writer.append(sw.toString(), wrappingIndentSize);
     }
 
+    /**
+     * <p>printf.</p>
+     *
+     * @param format a {@link java.lang.String} object.
+     * @param args a {@link java.lang.Object} object.
+     */
     public void printf(final String format, final Object... args)
     {
         final StringWriter sw = new StringWriter();
@@ -130,6 +148,9 @@ public class Outline
         writer.append(sw.toString(), 1);
     }
 
+    /**
+     * <p>reset.</p>
+     */
     public void reset()
     {
         children = null;
