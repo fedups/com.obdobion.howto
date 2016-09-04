@@ -1,5 +1,7 @@
 package com.obdobion.howto;
 
+import java.text.ParseException;
+
 /**
  * <p>
  * IPluginCommand interface.
@@ -17,7 +19,7 @@ public interface IPluginCommand
      * @param context a {@link com.obdobion.howto.Context} object.
      * @return a int.
      */
-    int execute(Context context);
+    int execute(Context context) throws ParseException;
 
     /**
      * <p>

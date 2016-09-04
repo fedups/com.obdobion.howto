@@ -287,10 +287,10 @@ public class PluginManager
 
             context.setStartTime(System.nanoTime());
             command.execute(context);
-            context.setEndTime(System.nanoTime());
             return context;
         } finally
         {
+            context.setEndTime(System.nanoTime());
             NDC.pop();
         }
     }

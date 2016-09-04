@@ -108,7 +108,7 @@ public class Outline
     void print(final IOutlineWriter ow)
     {
         if (contents != null)
-            ow.append(contents.trim(), 1);
+            ow.append(contents.trim(), 0);
         if (children != null)
         {
             ow.increaseLevel();
@@ -148,7 +148,7 @@ public class Outline
         final StringWriter sw = new StringWriter();
         final PrintWriter pw = new PrintWriter(sw);
         pw.printf(format, args);
-        writer.append(sw.toString(), 1);
+        writer.append(sw.toString(), 0);
     }
 
     /**

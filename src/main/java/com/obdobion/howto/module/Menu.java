@@ -77,8 +77,8 @@ public class Menu implements IPluginCommand
             {}
         });
 
-        final String headerLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s   %3$s\n";
-        final String detailLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s | %3$s\n";
+        final String headerLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s %3$s\n";
+        final String detailLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s %3$s\n";
 
         context.getOutline().printf(headerLayout, "Group", "Command", "Overview");
         context.getOutline().printf(headerLayout, "-----", "-------", "--------");
@@ -99,7 +99,7 @@ public class Menu implements IPluginCommand
                             && !(pluginCommand.getGroup().equals(Empty.GROUP)
                                     && pluginCommand.getName().equals(Empty.NAME)))
                     {
-                        context.getOutline().printf(longestGroupLength + 1 + longestNameLength + 4, sw.toString());
+                        context.getOutline().printf(longestGroupLength + 1 + longestNameLength + 1, sw.toString());
                         context.getOutline().printf("\n");
                     }
                 }

@@ -178,7 +178,7 @@ public class InteractiveConsole implements IPluginCommand
 
         } catch (final Exception e)
         {
-            logger.error("{} unsuccessfull {}", commandName, e.getMessage());
+            logger.error("{} unsuccessfull", commandName, e);
             context.getOutline().printf("%1$s", e.getMessage());
         }
         context.getOutline().reset();
