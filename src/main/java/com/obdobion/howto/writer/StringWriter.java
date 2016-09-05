@@ -18,7 +18,7 @@ import com.obdobion.howto.Config;
  * @author Chris DeGreef fedupforone@gmail.com
  *
  */
-class StringWriter extends ConsoleWriter
+public class StringWriter extends ConsoleWriter
 {
     private final static Logger logger = LoggerFactory.getLogger(StringWriter.class.getName());
 
@@ -26,7 +26,7 @@ class StringWriter extends ConsoleWriter
     @SuppressWarnings("hiding")
     PrintWriter                 console;
 
-    StringWriter(final Config config)
+    public StringWriter(final Config config)
     {
         super(config);
         sw = new java.io.StringWriter();

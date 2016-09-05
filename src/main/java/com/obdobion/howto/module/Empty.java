@@ -34,7 +34,7 @@ public class Empty implements IPluginCommand
     public int execute(final Context context)
     {
         context.setRecordingHistory(false);
-        context.getOutline().printf("Try \"menu\" or \"menu --help\"");
+        context.getOutline().printf("\n\nTry \"menu\" or \"menu --help\"\n\n");
         return 0;
     }
 

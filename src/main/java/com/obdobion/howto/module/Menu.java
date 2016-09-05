@@ -77,6 +77,12 @@ public class Menu implements IPluginCommand
             {}
         });
 
+        context.getOutline().printf(
+                "\n\nThank you for using howto. Read more about related open-source software...\n\n%1$s at %2$s\n%3$s at %4$s\n%5$s at %6$s\n\n",
+                "Argument ", "https://github.com/fedups/com.obdobion.argument/wiki",
+                "Algebrain", "https://github.com/fedups/com.obdobion.algebrain/wiki",
+                "Calendar ", "https://github.com/fedups/com.obdobion.calendar/wiki");
+
         final String headerLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s %3$s\n";
         final String detailLayout = "%1$-" + longestGroupLength + "s %2$-" + longestNameLength + "s %3$s\n";
 
@@ -107,7 +113,7 @@ public class Menu implements IPluginCommand
             {}
         });
 
-        context.getOutline().printf(headerLayout, "-----", "-------", "--------");
+        context.getOutline().printf("\n");
         return 0;
     }
 

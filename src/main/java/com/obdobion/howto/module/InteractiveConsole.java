@@ -65,6 +65,10 @@ public class InteractiveConsole implements IPluginCommand
                 NDC.push("IC");
                 try
                 {
+                    context.getOutline().printf(
+                            "\nWelcome to the interactive menu for howto.\nUse 'menu' to see the commands you can run.\nUse '<command> --help' for more information on a specific command.\nThis is a demonstration of the 'Argument' package.  Read more about it at %1$s.\n\n",
+                            "https://github.com/fedups/com.obdobion.argument/wiki");
+
                     while (true)
                     {
                         if (isStop())
@@ -179,7 +183,7 @@ public class InteractiveConsole implements IPluginCommand
         } catch (final Exception e)
         {
             logger.error("{} unsuccessfull", commandName, e);
-            context.getOutline().printf("%1$s", e.getMessage());
+            context.getOutline().printf("\n\n%1$s\n\n", e.getMessage());
         }
         context.getOutline().reset();
     }

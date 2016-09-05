@@ -17,7 +17,7 @@ import com.obdobion.howto.Config;
  * @author Chris DeGreef fedupforone@gmail.com
  *
  */
-class ConsoleWriter implements IOutlineWriter
+public class ConsoleWriter implements IOutlineWriter
 {
     private final static Logger logger = LoggerFactory.getLogger(ConsoleWriter.class.getName());
 
@@ -39,13 +39,13 @@ class ConsoleWriter implements IOutlineWriter
     @Override
     public void append(final String value, final int wrappingIndentSize)
     {
-        final String[] lines = value.split("\\n");
-        String remainderOfLongLine = "";
+        final String[] lines = value.split("\\n", -1);
+        String remainderOfLongLine = null;
         String aLine = null;
 
-        for (int line = 0; remainderOfLongLine.trim().length() > 0 || line < lines.length; line++)
+        for (int line = 0; remainderOfLongLine != null || line < lines.length; line++)
         {
-            if (remainderOfLongLine.trim().length() > 0)
+            if (remainderOfLongLine != null)
             {
                 aLine = remainderOfLongLine;
                 /*
@@ -82,7 +82,7 @@ class ConsoleWriter implements IOutlineWriter
                  * go ahead and overrun the end of the line. That is when the
                  * first part of the split ends up being just whitespace.
                  */
-                if (parts[0].trim().length() > 0)
+                if (parts[0].length() > 0)
                 {
                     printf(parts[0]);
                     newline();
@@ -90,11 +90,11 @@ class ConsoleWriter implements IOutlineWriter
                     continue;
                 }
             }
-            remainderOfLongLine = "";
+            remainderOfLongLine = null;
             printf(aLine);
             setCurrentLineLength(getCurrentLineLength() + aLine.length());
         }
-        newline();
+        // newline();
     }
 
     /** {@inheritDoc} */
@@ -210,6 +210,8 @@ class ConsoleWriter implements IOutlineWriter
              */
             if (line.charAt(b) == ' ')
                 splitPoint = b;
+        if (splitPoint >= line.length())
+            return new String[] { line };
         return new String[] {
                 line.substring(0, splitPoint),
                 line.substring(splitPoint + 1)

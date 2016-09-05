@@ -18,14 +18,14 @@ import com.obdobion.howto.Config;
  * @author Chris DeGreef fedupforone@gmail.com
  *
  */
-class SystemOutWriter extends ConsoleWriter
+public class SystemOutWriter extends ConsoleWriter
 {
     private final static Logger logger = LoggerFactory.getLogger(SystemOutWriter.class.getName());
 
     @SuppressWarnings("hiding")
     PrintWriter                 console;
 
-    SystemOutWriter(final Config config)
+    public SystemOutWriter(final Config config)
     {
         super(config);
         console = new PrintWriter(System.out);

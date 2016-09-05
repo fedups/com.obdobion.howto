@@ -52,7 +52,7 @@ final public class App
     /**
      * @return
      */
-    static private String workDir()
+    static public String workDir()
     {
         return System.getProperty("user.dir");
     }
