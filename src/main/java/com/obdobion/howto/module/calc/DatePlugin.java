@@ -71,7 +71,7 @@ public class DatePlugin implements IPluginCommand
         LocalDateTime ldt = null;
 
         if (javaTime != -1L)
-            ldt = CalendarFactory.convert(javaTime / 1000);
+            ldt = CalendarFactory.modify(CalendarFactory.convert(javaTime / 1000), dateModifications);
         else if (baseDate == null)
             ldt = CalendarFactory.today(dateModifications);
         else

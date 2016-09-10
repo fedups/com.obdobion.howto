@@ -137,7 +137,7 @@ public class Calculator implements IPluginCommand
     @Override
     public String getOverview()
     {
-        return "You can use this command to try out anything you can do with the Algebrain package.  This is a demonstration of the 'Calendar' package.  Use this link to read about it.  https://github.com/fedups/com.obdobion.algebrain/wiki";
+        return "You can use this command to try out anything you can do with the Algebrain package.  Use this link to read about it.  https://github.com/fedups/com.obdobion.algebrain/wiki";
     }
 
     /** {@inheritDoc} */

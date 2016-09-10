@@ -72,7 +72,7 @@ public class TimePlugin implements IPluginCommand
         LocalDateTime ldt = null;
 
         if (javaTime != -1L)
-            ldt = CalendarFactory.convert(javaTime / 1000);
+            ldt = CalendarFactory.modify(CalendarFactory.convert(javaTime / 1000), timeModifications);
         else if (baseTime == null)
             ldt = CalendarFactory.now(timeModifications);
         else

@@ -33,7 +33,7 @@
 	
 	<properties>
 		<calendar.version>2.1.1</calendar.version>
-		<algebrain.version>2.1.2</algebrain.version>
+		<algebrain.version>2.2.1</algebrain.version>
 		<argument.version>4.3.5</argument.version>
 
 		<java.target.version>1.8</java.target.version>

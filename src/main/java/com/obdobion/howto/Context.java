@@ -6,7 +6,7 @@ import com.obdobion.argument.ICmdLine;
 
 /**
  * <p>
- * Context class.
+ * Context1 class.
  * </p>
  *
  * @author Chris DeGreef fedupforone@gmail.com

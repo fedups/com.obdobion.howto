@@ -4,6 +4,7 @@ com.obdobion.howto.module.MakeAPlugin
 com.obdobion.howto.module.InteractiveConsole
 com.obdobion.howto.module.Quit
 com.obdobion.howto.module.Empty
+com.obdobion.howto.module.EchoCommand
 com.obdobion.howto.module.calc.Calculator
 com.obdobion.howto.module.calc.DateTimePlugin
 com.obdobion.howto.module.calc.DatePlugin

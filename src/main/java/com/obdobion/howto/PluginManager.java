@@ -67,6 +67,7 @@ public class PluginManager
 
     final Config         config;
     List<IPluginCommand> allPlugins;
+    private String       echoType;
 
     /**
      * <p>
@@ -92,6 +93,18 @@ public class PluginManager
         final List<String> names = new ArrayList<>();
         allPlugins.forEach(plugin -> names.add(plugin.getName()));
         return names;
+    }
+
+    private void echoCommand(final Context context)
+    {
+        final StringBuilder sb = new StringBuilder();
+        if (echoType.equals("commandline"))
+            context.getParser().exportCommandLine(sb);
+        else if (echoType.equals("property"))
+            context.getParser().exportNamespace("", sb);
+        else if (echoType.equals("xml"))
+            context.getParser().exportXml(sb);
+        context.getOutline().printf("\n%1s\n\n", sb.toString());
     }
 
     /**
@@ -285,6 +298,9 @@ public class PluginManager
             if (command.isOnceAndDone())
                 remove(command);
 
+            if (echoType != null && !echoType.equals("off"))
+                echoCommand(context);
+
             context.setStartTime(System.nanoTime());
             command.execute(context);
             return context;
@@ -353,6 +369,11 @@ public class PluginManager
             throws PluginNotFoundException, IOException, ParseException
     {
         return privateRun(createContext(config, this), commandName, args);
+    }
+
+    public void setEchoType(final String type)
+    {
+        echoType = type;
     }
 
     /**
