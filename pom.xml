@@ -25,11 +25,11 @@
             <organizationUrl>http://www.github.com/fedups</organizationUrl>
         </developer>
     </developers>
-    <scm>
-        <connection>scm:git:git@github.com:fedups/com.obdobion.howto.git</connection>
-        <developerConnection>scm:git:git@github.com:fedups/com.obdobion.howto.git</developerConnection>
-        <url>git@github.com:fedups/com.obdobion.howto.git</url>
-    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/fedups/com.obdobion.howto/issues</url>
+    </issueManagement>
 	
 	<properties>
 		<calendar.version>2.2.0</calendar.version>
