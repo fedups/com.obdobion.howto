@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.obdobion</groupId>
 	<artifactId>howto</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
     <name>${project.groupId}.${project.artifactId}</name>
 	<description>HowTo menuing system for plugins</description>
 	<url>https://github.com/fedups/com.obdobion.howto</url>
@@ -25,16 +25,22 @@
             <organizationUrl>http://www.github.com/fedups</organizationUrl>
         </developer>
     </developers>
+    
     <scm>
         <connection>scm:git:git@github.com:fedups/com.obdobion.howto.git</connection>
         <developerConnection>scm:git:git@github.com:fedups/com.obdobion.howto.git</developerConnection>
         <url>git@github.com:fedups/com.obdobion.howto.git</url>
     </scm>
+    
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/fedups/com.obdobion.howto/issues</url>
+    </issueManagement>
 	
 	<properties>
-		<calendar.version>2.2.0</calendar.version>
-		<algebrain.version>2.2.1</algebrain.version>
-		<argument.version>4.3.5</argument.version>
+		<calendar.version>2.2.3</calendar.version>
+		<algebrain.version>2.2.3</algebrain.version>
+		<argument.version>4.3.8</argument.version>
 
 		<java.target.version>1.8</java.target.version>
 		<java.source.version>1.8</java.source.version>
